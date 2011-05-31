@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Patientdb" Class="QldImportDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=win-ejmd2saqao9;Initial Catalog=Patientdb;Integrated Security=True" SettingsObjectName="LinqToXmlExperiments.My.MySettings" SettingsPropertyName="PatientdbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Patients" Member="Patients">
+    <Type Name="Patient">
+      <Column Name="PatientID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RPAMRN" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="MedicareNo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MedCardPositionNo" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="SuburbID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HomePhone" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="WorkPhone" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="MobilePhone" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="OtherInfo" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="EmailAddress" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="Sex" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="DoctorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReferralDate" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="ReferralLength" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="ReferralReport" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SymptomsCategory" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PotentialStudy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Progress" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FileLocation" Type="System.String" DbType="VarChar(70)" CanBeNull="true" />
+      <Column Name="MaritalStatus" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FathersFullName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="MothersFullName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="FathersSurname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MothersMaidenName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CountryOfBirth" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PrefLanguage" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Aboriginality" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="InterpreterRequired" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PatientUsername" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="PatientPassword" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DatePatientCreated" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="PatientCreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LastUpdatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LastUpdated" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Association Name="Patient_PatientsAllergyQLD" Member="PatientsAllergyQLDs" ThisKey="PatientID" OtherKey="PatientID" Type="PatientsAllergyQLD" />
+      <Association Name="Postcode_Patient" Member="Postcode" ThisKey="SuburbID" OtherKey="SuburbID" Type="Postcode" IsForeignKey="true" />
+      <Association Name="Doctor_Patient" Member="Doctor" ThisKey="DoctorID" OtherKey="DoctorID" Type="Doctor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Postcodes" Member="Postcodes">
+    <Type Name="Postcode">
+      <Column Name="SuburbID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Suburb" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Postcode" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
+      <Association Name="Postcode_Patient" Member="Patients" ThisKey="SuburbID" OtherKey="SuburbID" Type="Patient" />
+      <Association Name="Postcode_Doctor" Member="Doctors" ThisKey="SuburbID" OtherKey="SuburbID" Type="Doctor" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Doctors" Member="Doctors">
+    <Type Name="Doctor">
+      <Column Name="DoctorID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ProviderNo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="SuburbID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Specialty" Type="System.String" DbType="VarChar(70)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="EmailAddress" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OtherInfo" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="LastUpdatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LastUpdated" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Association Name="Doctor_Patient" Member="Patients" ThisKey="DoctorID" OtherKey="DoctorID" Type="Patient" />
+      <Association Name="Postcode_Doctor" Member="Postcode" ThisKey="SuburbID" OtherKey="SuburbID" Type="Postcode" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PatientsAllergyQLD" Member="PatientsAllergyQLDs">
+    <Type Name="PatientsAllergyQLD">
+      <Column Name="PatientID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="patient_id_qld" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Patient_PatientsAllergyQLD" Member="Patient" ThisKey="PatientID" OtherKey="PatientID" Type="Patient" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
